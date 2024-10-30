@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tp-foyer
+  labels:
+    app: tp-foyer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: tp-foyer
+  template:
+    metadata:
+      name: tp-foyer
+      labels:
+        app: tp-foyer
+    spec:
+      containers:
+        - name: tp-foyer
+          image: arij01/tp-foyer-1.0.2.jar
+          ports:
+            - containerPort: 8089
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+      
