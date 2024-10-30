@@ -20,6 +20,5 @@ spec:
           image: arij01/tp-foyer-1.0.2.jar
           ports:
             - containerPort: 8089
-          imagePullPolicy: IfNotPresent
-      restartPolicy: Always
+
       
