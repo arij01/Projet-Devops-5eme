@@ -26,8 +26,6 @@ public class Chambre {
     @Enumerated(EnumType.STRING)
     TypeChambre typeC;
 
-
-
     @OneToMany
     Set<Reservation> reservations;
 
