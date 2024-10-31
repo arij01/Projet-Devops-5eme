@@ -16,7 +16,7 @@ spec:
         - name: tp-foyer-container
           image: arij01/tp-foyer-1.0.2.jar  # Your Docker image
           ports:
-            - containerPort: 8080             # Adjust to your app’s port
+            - containerPort: 8089             # Adjust to your app’s port
 ---
 apiVersion: v1
 kind: Service
