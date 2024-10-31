@@ -1,9 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tp-foyer
-  labels:
-    app: tp-foyer
+  name: tp-foyer-deployment
 spec:
   replicas: 1
   selector:
@@ -11,14 +9,24 @@ spec:
       app: tp-foyer
   template:
     metadata:
-      name: tp-foyer
       labels:
         app: tp-foyer
     spec:
       containers:
-        - name: tp-foyer
-          image: arij01/tp-foyer-1.0.2.jar
+        - name: tp-foyer-container
+          image: arij01/tp-foyer-1.0.2.jar  # Your Docker image
           ports:
-            - containerPort: 8089
-
-      
+            - containerPort: 8080             # Adjust to your app’s port
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tp-foyer-service
+spec:
+  type: NodePort
+  selector:
+    app: tp-foyer
+  ports:
+    - protocol: TCP
+      port: 8089                           # Service port
+      targetPort: 8089                     # Container port
