@@ -12,8 +12,15 @@ RUN npm install --production
 # Copy the rest of the application code
 COPY . .
 
-# Build your frontend application (if needed, e.g., for React or Angular)
-RUN npm run build
+RUN npm run build --prod
+
+# Stage 2: Serve the Angular app with NGINX
+FROM nginx:alpine
+
+# Copy the built application from the builder stage to nginx's html directory
+COPY --from=builder /app/dist/frontend /usr/share/nginx/html
 
 # Expose the port your app runs on
 EXPOSE 3000
+# Start NGINX server
+CMD ["nginx", "-g", "daemon off;"]

@@ -95,7 +95,7 @@ spec:
     spec:
       containers:
         - name: angular-frontend
-          image: arij01/angular-frontend
+          image: arij01/frontend
           ports:
             - containerPort: 3000
 ---
