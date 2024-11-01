@@ -1,0 +1,24 @@
+<div class="container">
+  <h1>Liste des Étudiants</h1>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nom</th>
+      <th>Prénom</th>
+      <th>CIN</th>
+      <th>Date de Naissance</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let etudiant of etudiants">
+      <td>{{ etudiant.idEtudiant }}</td>
+      <td>{{ etudiant.nomEtudiant }}</td>
+      <td>{{ etudiant.prenomEtudiant }}</td>
+      <td>{{ etudiant.cinEtudiant }}</td>
+      <td>{{ etudiant.dateNaissance | date:'dd/MM/yyyy' }}</td>
+    </tr>
+    </tbody>
+  </table>
+<!--  <a routerLink="/add-etudiant" class="button">Ajouter un Étudiant</a>-->
+</div>
