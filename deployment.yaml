@@ -95,7 +95,7 @@ spec:
     spec:
       containers:
         - name: angular-frontend
-          image: your-dockerhub-username/angular-frontend:latest
+          image: arij01/angular-frontend
           ports:
             - containerPort: 3000
 ---
