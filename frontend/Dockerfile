@@ -1,4 +1,4 @@
-FROM node:22-alpine
+FROM node:22-alpine AS builder
 
 # Set the working directory inside the container
 WORKDIR /app
@@ -21,6 +21,6 @@ FROM nginx:alpine
 COPY --from=builder /app/dist/frontend /usr/share/nginx/html
 
 # Expose the port your app runs on
-EXPOSE 3000
+EXPOSE 80
 # Start NGINX server
 CMD ["nginx", "-g", "daemon off;"]
