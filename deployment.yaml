@@ -23,8 +23,7 @@ spec:
             - name: SPRING_DATASOURCE_USERNAME
               value: root
             - name: SPRING_DATASOURCE_PASSWORD
-              value: ""  # In production, consider using a Kubernetes Secret for passwords
-
+              value: ""  # Use a Kubernetes Secret for production
 ---
 apiVersion: v1
 kind: Service
