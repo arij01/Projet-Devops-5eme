@@ -15,7 +15,6 @@ public class ChambreRestController {
 
     IChambreService chambreService;
 
-// http://localhost:8089/tpfoyer/chambre/retrieve-all-chambres
      @GetMapping("/retrieve-all-chambres")
     public List<Chambre> getChambres() {
         List<Chambre> listChambres = chambreService.retrieveAllChambres();

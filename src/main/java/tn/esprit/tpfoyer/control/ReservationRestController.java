@@ -58,7 +58,7 @@ public class ReservationRestController {
         return reservation;
     }
 
-    // http://localhost:8089/tpfoyer/reservation/remove-reservation/{reservation-id}
+
     @DeleteMapping("/remove-reservation/{reservation-id}")
     public void removeReservation(@PathVariable("reservation-id") String rId) {
         reservationService.removeReservation(rId);
