@@ -1,32 +1,36 @@
 version: '3.8'
 
 services:
-  mysqldb:
-    image: mysql:5.7
-    restart: unless-stopped
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: rahmafarhat9/devops:1.0.0
+    container_name: java_app
+    ports:
+      - "8080:8080"  # Adaptez ce port selon votre application
+    depends_on:
+      - database
     environment:
-      - MYSQL_DATABASE=db
-      - MYSQL_ALLOW_EMPTY_PASSWORD=true
+      SPRING_DATASOURCE_URL: jdbc:mysql://database:3306/db  # Exemple si vous utilisez Spring
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD:
+    command: ["java", "-jar", "/app/Devops-Integration.jar"]  # Adaptez le chemin du fichier JAR
+    volumes:
+      - ./target:/app/target  # Vérifiez que le chemin correspond à votre structure de projet
+
+  database:
+    image: mysql:8.0
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+      MYSQL_DATABASE: db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
     ports:
       - "3306:3306"
     volumes:
-      - db:/var/lib/mysql
-  devops:
-    depends_on:
-      - mysqldb
-    image: rahmafarhat9/devops:1.0.0
-    restart: on-failure
-    ports:
-      - "8089:8089"
-    environment:
-      SPRING_APPLICATION_JSON: '{
-      "spring.datasource.url": "jdbc:mysql://mysqldb:3306/db?createDatabaseIfNotExist=true",
-      "spring.datasource.username": "root",
-      "spring.datasource.password": null,
-      "spring.jpa.properties.hibernate.dialect": "org.hibernate.dialect.MySQL5InnoDBDialect",
-      "spring.jpa.hibernate.ddl-auto": "update"
-      }'
-    stdin_open: true
-    tty: true
+      - db_data:/var/lib/mysql
+
 volumes:
-  db:
+  db_data:
