@@ -26,7 +26,6 @@ import static org.mockito.ArgumentMatchers.any;
 @Slf4j
 @ExtendWith(MockitoExtension.class)
 public class TestMockitou {
-
     @Mock
     private IBlocService blocService;
 
@@ -36,7 +35,7 @@ public class TestMockitou {
     private Bloc bloc;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         MockitoAnnotations.openMocks(this);
         bloc = new Bloc();
         bloc.setIdBloc(1L);
@@ -45,7 +44,7 @@ public class TestMockitou {
     }
 
     @Test
-    public void shouldReturnListOfBlocsWhenGetBlocsCalled() {
+    void shouldReturnListOfBlocsWhenGetBlocsCalled() {
         // Arrange: Prepare mock data and expectations
         List<Bloc> blocList = Arrays.asList(bloc);
         when(blocService.retrieveAllBlocs()).thenReturn(blocList);
@@ -63,7 +62,7 @@ public class TestMockitou {
     }
 
     @Test
-    public void shouldReturnBlocWhenRetrieveBlocCalledWithValidId() {
+    void shouldReturnBlocWhenRetrieveBlocCalledWithValidId() {
         // Arrange: Prepare mock data and expectations
         when(blocService.retrieveBloc(1L)).thenReturn(bloc);
 
@@ -79,7 +78,7 @@ public class TestMockitou {
     }
 
     @Test
-    public void shouldAddBlocSuccessfullyWhenAddBlocCalled() {
+    void shouldAddBlocSuccessfullyWhenAddBlocCalled() {
         // Arrange: Prepare mock data and expectations
         when(blocService.addBloc(any(Bloc.class))).thenReturn(bloc);
 
@@ -95,7 +94,7 @@ public class TestMockitou {
     }
 
     @Test
-    public void shouldRemoveBlocWhenRemoveBlocCalledWithValidId() {
+    void shouldRemoveBlocWhenRemoveBlocCalledWithValidId() {
         // Arrange: Do nothing when the service remove method is called
         doNothing().when(blocService).removeBloc(1L);
 
@@ -107,7 +106,7 @@ public class TestMockitou {
     }
 
     @Test
-    public void shouldModifyBlocSuccessfullyWhenModifyBlocCalled() {
+    void shouldModifyBlocSuccessfullyWhenModifyBlocCalled() {
         // Arrange: Prepare mock data and expectations
         when(blocService.modifyBloc(any(Bloc.class))).thenReturn(bloc);
 
