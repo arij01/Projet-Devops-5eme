@@ -3,7 +3,7 @@ FROM openjdk:17-jdk-slim
 WORKDIR /app
 
 # Copier le fichier JAR dans le conteneur
-COPY target/Devops-Integration.jar /app/Devops-Integration.jar  # Remplacez "ADD" par "COPY" et assurez-vous que le nom est correct
+COPY target/Devops-Integration.jar /app/Devops-Integration.jar
 
 # Expose le port de l'application
 EXPOSE 8080
