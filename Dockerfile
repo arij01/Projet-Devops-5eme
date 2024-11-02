@@ -6,7 +6,7 @@ WORKDIR /app
 COPY target/Devops-Integration.jar /app/Devops-Integration.jar
 
 # Expose le port de l'application
-EXPOSE 8080
+EXPOSE 8089
 
 # Commande pour exécuter le fichier JAR
 CMD ["java", "-jar", "/app/Devops-Integration.jar"]
