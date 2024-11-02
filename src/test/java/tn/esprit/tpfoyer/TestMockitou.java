@@ -38,87 +38,87 @@ public class TestMockitou {
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-        bloc = new Bloc(); // Créez un objet Bloc d'exemple
+        bloc = new Bloc();
         bloc.setIdBloc(1L);
         bloc.setNomBloc("Bloc A");
         bloc.setCapaciteBloc(100);
     }
 
     @Test
-    public void testGetBlocs() {
-        // Given
+    public void shouldReturnListOfBlocsWhenGetBlocsCalled() {
+        // Arrange: Prepare mock data and expectations
         List<Bloc> blocList = Arrays.asList(bloc);
         when(blocService.retrieveAllBlocs()).thenReturn(blocList);
 
-        // When
+        // Act: Call the method to test
         List<Bloc> result = blocRestController.getBlocs();
 
-        // Then
-        assertNotNull(result);
-        assertEquals(1, result.size());
-        assertEquals(1L, result.get(0).getIdBloc());
+        // Assert: Verify the outcome
+        assertNotNull(result, "The result should not be null");
+        assertEquals(1, result.size(), "The result size should match the mock data");
+        assertEquals(1L, result.get(0).getIdBloc(), "The ID of the bloc should match");
 
-        // Vérifiez que la méthode du service a été appelée une fois
+        // Verify the service method is called once
         verify(blocService, times(1)).retrieveAllBlocs();
     }
 
     @Test
-    public void testRetrieveBloc() {
-        // Given
+    public void shouldReturnBlocWhenRetrieveBlocCalledWithValidId() {
+        // Arrange: Prepare mock data and expectations
         when(blocService.retrieveBloc(1L)).thenReturn(bloc);
 
-        // When
+        // Act: Call the method to test
         Bloc result = blocRestController.retrieveBloc(1L);
 
-        // Then
-        assertNotNull(result);
-        assertEquals(1L, result.getIdBloc());
+        // Assert: Verify the outcome
+        assertNotNull(result, "The result should not be null");
+        assertEquals(1L, result.getIdBloc(), "The ID of the bloc should match");
 
-        // Vérifiez que la méthode du service a été appelée une fois
+        // Verify the service method is called once
         verify(blocService, times(1)).retrieveBloc(1L);
     }
 
     @Test
-    public void testAddBloc() {
-        // Given
+    public void shouldAddBlocSuccessfullyWhenAddBlocCalled() {
+        // Arrange: Prepare mock data and expectations
         when(blocService.addBloc(any(Bloc.class))).thenReturn(bloc);
 
-        // When
+        // Act: Call the method to test
         Bloc result = blocRestController.addBloc(bloc);
 
-        // Then
-        assertNotNull(result);
-        assertEquals(1L, result.getIdBloc());
+        // Assert: Verify the outcome
+        assertNotNull(result, "The result should not be null");
+        assertEquals(1L, result.getIdBloc(), "The ID of the added bloc should match");
 
-        // Vérifiez que la méthode du service a été appelée une fois
+        // Verify the service method is called once
         verify(blocService, times(1)).addBloc(any(Bloc.class));
     }
 
     @Test
-    public void testRemoveBloc() {
-        // Ne rien faire lorsque la méthode remove est appelée
+    public void shouldRemoveBlocWhenRemoveBlocCalledWithValidId() {
+        // Arrange: Do nothing when the service remove method is called
         doNothing().when(blocService).removeBloc(1L);
 
-        // Appeler la méthode du contrôleur
+        // Act: Call the method to test
         blocRestController.removeBloc(1L);
 
-        // Vérifiez que la méthode du service a été appelée une fois
+        // Verify the service method is called once
         verify(blocService, times(1)).removeBloc(1L);
     }
 
     @Test
-    public void testModifyBloc() {
-        // Given
+    public void shouldModifyBlocSuccessfullyWhenModifyBlocCalled() {
+        // Arrange: Prepare mock data and expectations
         when(blocService.modifyBloc(any(Bloc.class))).thenReturn(bloc);
 
-        // When
+        // Act: Call the method to test
         Bloc result = blocRestController.modifyBloc(bloc);
 
-        // Then
-        assertNotNull(result);
-        assertEquals(1L, result.getIdBloc());
+        // Assert: Verify the outcome
+        assertNotNull(result, "The result should not be null");
+        assertEquals(1L, result.getIdBloc(), "The ID of the modified bloc should match");
 
-        // Vérifiez que la méthode du service a été appelée une fois
+        // Verify the service method is called once
         verify(blocService, times(1)).modifyBloc(any(Bloc.class));
     }
 }
