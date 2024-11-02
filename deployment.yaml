@@ -30,14 +30,14 @@ kind: Service
 metadata:
   name: tp-foyer-service
 spec:
-  type: NodePort  # External access for backend
+  type: LoadBalancer # External access for backend
   selector:
     app: tp-foyer
   ports:
     - protocol: TCP
       port: 8089               # Service port
       targetPort: 8089         # Backend container port
-      # nodePort: 30009       # Optional: specify a fixed NodePort if needed
+      nodePort: 30009       # Optional: specify a fixed NodePort if needed
 
 ---
 apiVersion: apps/v1
@@ -109,5 +109,6 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
+      nodePort: 30080
   type: NodePort
-  # nodePort: 30080
+
