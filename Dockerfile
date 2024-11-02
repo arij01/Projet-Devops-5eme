@@ -1,14 +1,12 @@
-# Use an official OpenJDK runtime as a parent image
 FROM openjdk:17-jdk-slim
 
-# Set the working directory in the container
 WORKDIR /app
 
-# Copy the JAR file into the container at /app
-ADD target/Devops-Integration   Devops-Integration.jar
+# Copier le fichier JAR dans le conteneur
+COPY target/Devops-Integration.jar /app/Devops-Integration.jar  # Remplacez "ADD" par "COPY" et assurez-vous que le nom est correct
 
-# Expose the port the app runs on
+# Expose le port de l'application
 EXPOSE 8080
 
-# Command to run the application
-CMD ["java", "-jar", "/Devops-Integration.jar"]
+# Commande pour exécuter le fichier JAR
+CMD ["java", "-jar", "/app/Devops-Integration.jar"]
