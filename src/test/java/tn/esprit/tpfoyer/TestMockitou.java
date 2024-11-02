@@ -25,7 +25,7 @@ import static org.mockito.ArgumentMatchers.any;
 
 @Slf4j
 @ExtendWith(MockitoExtension.class)
-public class TestMockitou {
+ class TestMockitou {
     @Mock
     private IBlocService blocService;
 
