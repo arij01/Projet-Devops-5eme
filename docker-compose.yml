@@ -1,0 +1,34 @@
+version: "3.7"
+services:
+  Deploy:
+    container_name: Devops
+    build: .
+    ports:
+      - "8089:8089"  # Updated port to match the Tomcat configuration
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://dbmysql:3306/db?createDatabaseIfNotExist=true&useSSL=false
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=
+      - SPRING_JPA_SHOW_SQL=true
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    restart: unless-stopped
+    image: rahmafarhat9/devops
+    depends_on:
+      - dbmysql
+
+  dbmysql:
+    image: "mysql:5.6"
+    container_name: dbmysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=db  # Create the database on startup
+    ports:
+      - "3306:3306"
+    restart: unless-stopped
+    volumes:
+      - db:/var/lib/mysql
+
+
+
+volumes:
+  db:
