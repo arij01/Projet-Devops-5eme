@@ -37,7 +37,7 @@ spec:
     - protocol: TCP
       port: 8089               # Service port
       targetPort: 8089         # Backend container port
-      nodePort: 8089      # Optional: specify a fixed NodePort if needed
+      nodePort: 30466      # Optional: specify a fixed NodePort if needed
 
 ---
 apiVersion: apps/v1
