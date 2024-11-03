@@ -24,6 +24,21 @@ spec:
             value: root
           - name: SPRING_DATASOURCE_PASSWORD
             value: ""  # Use a Kubernetes Secret for production
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tp-foyer-service
+spec:
+  type: NodePort
+  selector:
+    app: tp-foyer
+  ports:
+    - protocol: TCP
+      port: 8089
+      targetPort: 8089
+
+
 
 ---
 apiVersion: v1
