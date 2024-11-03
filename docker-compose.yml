@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  tp-foyer:
+    image: yacine0/tp-foyer-5.0.0  # Docker image
+    ports:
+      - "8089:8089"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/db?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: ""  # Utilisez un secret en production
+    depends_on:
+      - mysql  # Assurez-vous que le service MySQL démarre avant tp-foyer
+
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yacine"
+      MYSQL_DATABASE: db
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql  # Optionnel: Pour persister les données
+
+volumes:
+  mysql-data:
