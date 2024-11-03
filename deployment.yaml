@@ -14,30 +14,30 @@ spec:
     spec:
       containers:
         - name: tp-foyer-container
-          image: arij01/tp-foyer:1.0.2  # Backend Docker image
+          image: arij01/tp-foyer:1.0.2
           ports:
-            - containerPort: 8089  # Ensure this matches your backend's exposed port
+            - containerPort: 8089
           env:
             - name: SPRING_DATASOURCE_URL
               value: jdbc:mysql://mysql-service:3306/db?createDatabaseIfNotExist=true
             - name: SPRING_DATASOURCE_USERNAME
               value: root
             - name: SPRING_DATASOURCE_PASSWORD
-              value: ""  # Use a Kubernetes Secret for production
+              value: ""
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: tp-foyer-service
 spec:
-  type: NodePort # External access for backend
+  type: LoadBalancer
   selector:
     app: tp-foyer
   ports:
     - protocol: TCP
-      port: 8089               # Service port
-      targetPort: 8089         # Backend container port
-      nodePort: 30466      # Optional: specify a fixed NodePort if needed
+      port: 8089
+      targetPort: 8089
+      nodePort: 30466
 
 ---
 apiVersion: apps/v1
@@ -110,5 +110,5 @@ spec:
       port: 80
       targetPort: 80
       nodePort: 30080
-  type: NodePort
+  type: LoadBalancer
 
