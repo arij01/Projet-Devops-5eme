@@ -24,7 +24,7 @@ services:
 
   angular-frontend:
     build:
-      context: Projet-Devops-5eme\frontend
+      context: ./frontend
     image: yacine0/frontend  # Remplacez par votre image frontend
     ports:
       - "4200:80"   # Exposez le port 80 du conteneur sur le port 30080 de l'hôte
