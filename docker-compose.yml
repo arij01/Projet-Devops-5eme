@@ -8,17 +8,15 @@ services:
     image: rahmafarhat9/devops:1.0.0
     container_name: java_app
     ports:
-      - "8089:8089"  # Adaptez ce port selon votre application
+      - "8089:8089"  # Port de l'application
     depends_on:
       - database
     environment:
-
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/db?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_URL: jdbc:mysql://database:3306/db?createDatabaseIfNotExist=true
       SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD:
-    command: ["java", "-jar", "/app/Devops-Integration.jar"]  # Adaptez le chemin du fichier JAR
+      SPRING_DATASOURCE_PASSWORD: password
     volumes:
-      - ./target:/app/target  # Vérifiez que le chemin correspond à votre structure de projet
+      - ./target:/app/target  # Montée du répertoire target
 
   database:
     image: mysql:8.0
