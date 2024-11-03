@@ -13,7 +13,7 @@ services:
       - database
     environment:
 
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql_db:3306/db  # Exemple si vous utilisez Spring
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/db?createDatabaseIfNotExist=true
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD:
     command: ["java", "-jar", "/app/Devops-Integration.jar"]  # Adaptez le chemin du fichier JAR
