@@ -23,9 +23,11 @@ services:
       - mysql-data:/var/lib/mysql  # Optionnel: Pour persister les données
 
   angular-frontend:
+    build:
+      context: Projet-Devops-5eme\frontend
     image: yacine0/frontend  # Remplacez par votre image frontend
     ports:
-      - "30080:80"  # Exposez le port 80 du conteneur sur le port 30080 de l'hôte
+      - "4200:80"   # Exposez le port 80 du conteneur sur le port 30080 de l'hôte
     depends_on:
       - tp-foyer  # Assurez-vous que le service tp-foyer démarre avant le frontend
 
