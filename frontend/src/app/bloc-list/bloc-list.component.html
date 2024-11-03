@@ -1,0 +1,22 @@
+<div class="container">
+  <h1>Liste des Blocs</h1>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nom</th>
+      <th>Capacite</th>
+      
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let bloc of blocs">
+      <td>{{ bloc.idBloc }}</td>
+      <td>{{ bloc.nomBloc }}</td>
+      <td>{{ bloc.capaciteBloc }}</td>
+      
+    </tr>
+    </tbody>
+  </table>
+<!--  <a routerLink="/add-bloc" class="button">Ajouter un bloc</a>-->
+</div>
