@@ -8,10 +8,11 @@ services:
     image: rahmafarhat9/devops:1.0.0
     container_name: java_app
     ports:
-      - "8080:8080"  # Adaptez ce port selon votre application
+      - "8089:8089"  # Adaptez ce port selon votre application
     depends_on:
       - database
     environment:
+
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql_db:3306/db  # Exemple si vous utilisez Spring
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD:
@@ -28,7 +29,7 @@ services:
       MYSQL_USER: user
       MYSQL_PASSWORD: password
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - db_data:/var/lib/mysql
 
