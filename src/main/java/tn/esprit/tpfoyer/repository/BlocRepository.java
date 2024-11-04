@@ -62,7 +62,7 @@ import java.util.List;
 
 
    // Récupérer les Blocs qui ont une capacité inférieurs à 50 :
-   // List<Bloc> findAllByCapaciteBlocLessThan(long c);
+
 
 
     // Récupérer tous les Blocs qui ont un nom qui commence par "Bl" :
@@ -105,7 +105,7 @@ import java.util.List;
 
 
     //Bloc findByC
-    //findAllByFoyerIsNull();
+
 
 
 
