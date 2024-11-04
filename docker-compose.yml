@@ -1,35 +1,30 @@
 version: '3.8'
 
 services:
-  app:
+  tp-foyer:
     build:
-      context: .
+      context: .  # Spécifie le répertoire où se trouve votre Dockerfile
       dockerfile: Dockerfile
-    image: rahmafarhat9/devops:1.0.0
-    container_name: java_app
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://docker-mysql:3306/db?autoReconnect=true&useSSL=false
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=  # Pas de mot de passe pour root
     ports:
-      - "8089:8089"  # Port de l'application
+      - "8085:8085"  # Expose le port 8089
     depends_on:
-      - database
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://database:3306/db?createDatabaseIfNotExist=true
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD:
-    volumes:
-      - ./target:/app/target  # Montée du répertoire target
+      - docker-mysql  # Assure que MySQL démarre avant cette application
+    restart: always  # Redémarre le conteneur automatiquement en cas de besoin
 
-  database:
-    image: mysql:8.0
-    container_name: mysql_db
+  docker-mysql:
+    image: "mysql:5.6"
     environment:
-      MYSQL_ROOT_PASSWORD:
-      MYSQL_DATABASE: db
-      MYSQL_USER: user
-      MYSQL_PASSWORD: password
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes  # Permet un mot de passe root vide
+      - MYSQL_ROOT_PASSWORD=  # Pas de mot de passe pour root
+      - MYSQL_DATABASE=db  # Crée la base de données 'rahmaf'
     ports:
-      - "3307:3306"
+      - "3307:3306"  # Mappe le port 3307 du système hôte au port 3306 du conteneur
     volumes:
-      - db_data:/var/lib/mysql
+      - mysql-data:/var/lib/mysql  # Garde les données MySQL même après l'arrêt du conteneur
 
 volumes:
-  db_data:
+  mysql-data:

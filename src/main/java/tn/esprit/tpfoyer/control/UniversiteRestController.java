@@ -6,6 +6,7 @@ import tn.esprit.tpfoyer.entity.Universite;
 import tn.esprit.tpfoyer.service.IUniversiteService;
 
 import java.util.List;
+@CrossOrigin(origins = "*") // Adjust as needed
 
 @RestController
 @AllArgsConstructor
