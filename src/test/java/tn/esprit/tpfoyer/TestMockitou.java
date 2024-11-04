@@ -23,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.ArgumentMatchers.any;
 
+
 @Slf4j
 @ExtendWith(MockitoExtension.class)
 public class TestMockitou {
@@ -36,14 +37,14 @@ public class TestMockitou {
 
     @BeforeEach
     public void setUp() {
-        MockitoAnnotations.openMocks(this);
         etudiant = new Etudiant(); // Create a sample Etudiant object
         etudiant.setIdEtudiant(1L);
         etudiant.setNomEtudiant("John");
         etudiant.setPrenomEtudiant("Doe");
         etudiant.setCinEtudiant(12345678L);
-        etudiant.setDateNaissance(new Date()); // Use the current date for simplicity
+        etudiant.setDateNaissance(new Date()); // Consider using a fixed date if necessary
     }
+
     @Test
     public void testGetEtudiants() {
         // Given
