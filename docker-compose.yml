@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  tp-foyer-app:
+    image: walanaghmouchi/tp-foyer:1.0.0  # Replace with your actual Docker Hub image name
+    container_name: tp-foyer-app
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://tp-foyer-db:3306/tp_foyer_db?createDatabaseIfNotExist=true  # Ensure DB creation
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=admin
+    ports:
+      - "8082:8082"  # Map container port 8082 to host port 8082
+    depends_on:
+      - tp-foyer-db
+
+  tp-foyer-db:
+    image: mysql:8.0  # MySQL version
+    container_name: tp-foyer-db
+    environment:
+      MYSQL_ROOT_PASSWORD: admin  # Replace with your chosen password for root
+      MYSQL_DATABASE: tp_foyer_db  # Database name
+    ports:
+      - "3306:3306"  # Map container port 3306 to host port 3306
+    volumes:
+      - mysql_data:/var/lib/mysql  # Persist MySQL data
+
+volumes:
+  mysql_data:  # Named volume for MySQL data persistence
