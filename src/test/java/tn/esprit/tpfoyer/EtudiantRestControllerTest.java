@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import tn.esprit.tpfoyer.control.EtudiantRestController;
 import tn.esprit.tpfoyer.entity.Etudiant;
@@ -26,7 +25,7 @@ import static org.mockito.ArgumentMatchers.any;
 
 @Slf4j
 @ExtendWith(MockitoExtension.class)
-public class TestMockitou {
+public class EtudiantRestControllerTest {
     @Mock
     private IEtudiantService etudiantService;
 
