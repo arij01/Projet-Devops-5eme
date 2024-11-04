@@ -1,6 +1,7 @@
 package tn.esprit.tpfoyer.service;
 
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.tpfoyer.entity.Reservation;
@@ -20,7 +21,8 @@ public class ReservationServiceImpl implements IReservationService {
     }
 
     public Reservation retrieveReservation(String reservationId) {
-        return reservationRepository.findById(reservationId).get();
+        return reservationRepository.findById(reservationId)
+                .orElseThrow(() -> new EntityNotFoundException("Réservation non trouvée avec l'ID : " + reservationId));
     }
 
     public Reservation addReservation(Reservation r) {

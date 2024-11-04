@@ -1,6 +1,7 @@
 package tn.esprit.tpfoyer.service;
 
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.tpfoyer.entity.Foyer;
@@ -17,7 +18,8 @@ public class FoyerServiceImpl implements IFoyerService {
         return foyerRepository.findAll();
     }
     public Foyer retrieveFoyer(Long foyerId) {
-        return foyerRepository.findById(foyerId).get();
+        return foyerRepository.findById(foyerId)
+                .orElseThrow(() -> new EntityNotFoundException("Foyer non trouvé avec l'ID : " + foyerId));
     }
     public Foyer addFoyer(Foyer f) {
         return foyerRepository.save(f);

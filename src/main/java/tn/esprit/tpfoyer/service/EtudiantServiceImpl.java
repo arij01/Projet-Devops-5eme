@@ -1,6 +1,7 @@
 package tn.esprit.tpfoyer.service;
 
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import tn.esprit.tpfoyer.entity.Etudiant;
@@ -19,7 +20,8 @@ public class EtudiantServiceImpl implements IEtudiantService {
         return etudiantRepository.findAll();
     }
     public Etudiant retrieveEtudiant(Long etudiantId) {
-        return etudiantRepository.findById(etudiantId).get();
+        return etudiantRepository.findById(etudiantId)
+                .orElseThrow(() -> new EntityNotFoundException("Etudiant non trouvé avec l'ID : " + etudiantId));
     }
     public Etudiant addEtudiant(Etudiant c) {
         return etudiantRepository.save(c);
