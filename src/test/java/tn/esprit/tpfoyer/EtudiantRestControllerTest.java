@@ -25,7 +25,7 @@ import static org.mockito.ArgumentMatchers.any;
 
 @Slf4j
 @ExtendWith(MockitoExtension.class)
-class EtudiantRestControllerTest {
+public class EtudiantRestControllerTest {
     @Mock
     private IEtudiantService etudiantService;
 
@@ -36,16 +36,16 @@ class EtudiantRestControllerTest {
 
     @BeforeEach
     public void setUp() {
-        etudiant = new Etudiant();
+        etudiant = new Etudiant(); // Create a sample Etudiant object
         etudiant.setIdEtudiant(1L);
         etudiant.setNomEtudiant("John");
         etudiant.setPrenomEtudiant("Doe");
         etudiant.setCinEtudiant(12345678L);
-        etudiant.setDateNaissance(new Date());
+        etudiant.setDateNaissance(new Date()); // Consider using a fixed date if necessary
     }
 
     @Test
-    void testGetEtudiants() {
+    public void testGetEtudiants() {
         // Given
         List<Etudiant> etudiantList = Arrays.asList(etudiant);
         when(etudiantService.retrieveAllEtudiants()).thenReturn(etudiantList);
@@ -63,14 +63,14 @@ class EtudiantRestControllerTest {
     }
 
     @Test
-    void testRetrieveEtudiantParCin() {
-
+    public void testRetrieveEtudiantParCin() {
+        // Given
         when(etudiantService.recupererEtudiantParCin(12345678L)).thenReturn(etudiant);
 
-
+        // When
         Etudiant result = etudiantRestController.retrieveEtudiantParCin(12345678L);
 
-
+        // Then
         assertNotNull(result);
         assertEquals(12345678L, result.getCinEtudiant());
 
@@ -79,62 +79,62 @@ class EtudiantRestControllerTest {
     }
 
     @Test
-    void testRetrieveEtudiantById() {
-
+    public void testRetrieveEtudiantById() {
+        // Given
         when(etudiantService.retrieveEtudiant(1L)).thenReturn(etudiant);
 
-
+        // When
         Etudiant result = etudiantRestController.retrieveEtudiant(1L);
 
-
+        // Then
         assertNotNull(result);
         assertEquals(1L, result.getIdEtudiant());
 
-
+        // Verify that the service method was called once
         verify(etudiantService, times(1)).retrieveEtudiant(1L);
     }
 
     @Test
-    void testAddEtudiant() {
-
+    public void testAddEtudiant() {
+        // Given
         when(etudiantService.addEtudiant(any(Etudiant.class))).thenReturn(etudiant);
 
-
+        // When
         Etudiant result = etudiantRestController.addEtudiant(etudiant);
 
-
+        // Then
         assertNotNull(result);
         assertEquals(1L, result.getIdEtudiant());
 
-
+        // Verify that the service method was called once
         verify(etudiantService, times(1)).addEtudiant(any(Etudiant.class));
     }
 
     @Test
-    void testRemoveEtudiant() {
-
+    public void testRemoveEtudiant() {
+        // Do nothing when the service's remove method is called
         doNothing().when(etudiantService).removeEtudiant(1L);
 
-
+        // Call the controller method
         etudiantRestController.removeEtudiant(1L);
 
-
+        // Verify that the service method was called once
         verify(etudiantService, times(1)).removeEtudiant(1L);
     }
 
     @Test
-    void testModifyEtudiant() {
-
+    public void testModifyEtudiant() {
+        // Given
         when(etudiantService.modifyEtudiant(any(Etudiant.class))).thenReturn(etudiant);
 
-
+        // When
         Etudiant result = etudiantRestController.modifyEtudiant(etudiant);
 
-
+        // Then
         assertNotNull(result);
         assertEquals(1L, result.getIdEtudiant());
 
-
+        // Verify that the service method was called once
         verify(etudiantService, times(1)).modifyEtudiant(any(Etudiant.class));
     }
 }
